@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('class_rooms', function (Blueprint $table) {
             $table->id();
+            $table->string('class_name');
+
+            $table->foreignId('teacher_id')
+                    ->nullable()
+                    ->constrained()
+                    ->nullOnDelete(); // there can be a class without a teacher
+
+            $table->foreignId('department_id')
+                    ->constrained()
+                    ->onDelete('cascade');
+
             $table->timestamps();
         });
     }
